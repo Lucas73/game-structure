@@ -46,12 +46,30 @@ Player.prototype.draw = function() {
 
 Player.prototype.move = function() {
   this.x += this.vx;
+  if (this.x + this.w >= this.ctx.canvas.width) {
+    this.vx = 0;
+    this.x -= 2;
+  } 
+
+  if (this.x <= 0) {
+    this.vx = 0;
+    this.x += 2;
+  }
+  // else {
+  //    this.vx = 0;
+  //    this.x += this.vx;
+  //  }
+
+
+  
   this.vy += this.g;
   this.y += this.vy;
   if(this.y > this.y0){
     this.y = this.y0;
     this.vy = 0;
   }
+
+  
 };
 
 Player.prototype.animate = function() {
@@ -89,6 +107,7 @@ Player.prototype.onKeyDown = function(event) {
 };
 
 Player.prototype.onKeyUp = function(event) {
+  this.vx = 0;
 };
 
 Player.prototype.setListeners = function() {
